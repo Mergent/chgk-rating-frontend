@@ -1,0 +1,10 @@
+{
+  "services": {
+    "auth": {
+      "url": "http://127.0.0.1:8093/authservice",
+      "endpoints": {
+        "token": "/oauth/token"
+      }
+    }
+  }
+}

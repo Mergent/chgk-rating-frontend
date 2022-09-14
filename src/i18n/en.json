@@ -1,0 +1,12 @@
+{
+  "pages": {
+    "main": "Main",
+    "users": "Users",
+    "teams": "Teams",
+    "players": "Players"
+  },
+  "languages": {
+    "en": "English",
+    "ru": "Russia"
+  }
+}

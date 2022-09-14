@@ -1,4 +1,5 @@
 import { Layout } from 'antd';
+import LanguageDropdown from './LanguageDropdown';
 
 const HeaderComp: React.FC = () => {
   return (
@@ -7,7 +8,9 @@ const HeaderComp: React.FC = () => {
       style={{
         padding: 0,
       }}
-    />
+    >
+      <LanguageDropdown />
+    </Layout.Header>
   )
 }
 

@@ -3,7 +3,7 @@ import FooterComp from './Footer';
 import HeaderComp from './Header';
 import SiderComp from './Sider';
 
-const LayoutComp: React.FC = () => {
+const LayoutComp: React.FC = (props) => {
   return (
     <Layout
       style={{
@@ -33,7 +33,7 @@ const LayoutComp: React.FC = () => {
               minHeight: 360,
             }}
           >
-            Bill is a cat.
+            {props.children}
           </div>
         </Layout.Content>
         <FooterComp />
