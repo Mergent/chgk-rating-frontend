@@ -8,5 +8,8 @@
   "languages": {
     "en": "English",
     "ru": "Russia"
+  },
+  "header": {
+    "login": "Log in/register"
   }
 }

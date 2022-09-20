@@ -1,9 +1,20 @@
 import axios from "axios";
+import fakeApi from "../devAPI";
 import { ID_TOKEN } from "./const";
+import jwt_decode from 'jwt-decode';
+
+export const decodeUserProfile = (idToken: any) => {
+  try {
+    return jwt_decode(idToken);
+  } catch (err) {
+    return null;
+  }
+};
 
 export const authApi = async (authData: any, url: string) => {
+  console.log("LOG -> ~ authApi ~ process.env.REACT_APP_ENV", process.env.REACT_APP_ENV)
   if (process.env.REACT_APP_ENV === 'development') {
-    // return fakeApi(url, authData);
+    return fakeApi(url, authData);
   }
 
   const formData = prepareFormData(authData);
@@ -23,7 +34,7 @@ export const authApi = async (authData: any, url: string) => {
 
 export const callApi = async (url: string, config: any) => {
   if (process.env.REACT_APP_ENV === 'development') {
-    // return fakeApi(url, config);
+    return fakeApi(url, config);
   }
 
   const {data} = await axios(url, {
