@@ -9,7 +9,7 @@ interface UsersParams extends PaginationParams {}
 
 export const defaultParamsUsers: UsersParams = {
   page: 0,
-  size: 50,
+  size: 10,
   sort: 'desc',
   order: 'date',
   filter: {},
@@ -24,8 +24,8 @@ const getUsers = async (links: Links, params: UsersParams) => {
   const config = {
     method: 'get',
     params: {
-      page: params?.page ?? 0,
-      size: params?.size ?? 20,
+      page: params?.page,
+      size: params?.size,
       sort,
       // search: params?.search,
       // ...getPreparedForSubmissionFilters(params?.filters)
