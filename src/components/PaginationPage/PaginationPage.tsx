@@ -4,6 +4,8 @@ import { SearchOutlined } from '@ant-design/icons';
 import Highlighter from 'react-highlight-words';
 import { PaginationPageProps } from "./PaginationPage.props";
 import type { PaginationProps } from 'antd';
+import type { ColumnsType, TablePaginationConfig } from 'antd/es/table';
+import type { FilterValue, SorterResult } from 'antd/es/table/interface';
 
 const PaginationPage: FC<PaginationPageProps> = ({ data, columns, setParams, loading }) => {
   const [searchText, setSearchText] = useState('');
@@ -21,7 +23,7 @@ const PaginationPage: FC<PaginationPageProps> = ({ data, columns, setParams, loa
     setSearchText('');
   };
 
-  const getColumnSearchProps = (dataIndex: string) => ({
+  const getColumnSearchProps = (dataIndex: string, title: string) => ({
     filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }: any) => (
       <div
         style={{
@@ -91,11 +93,7 @@ const PaginationPage: FC<PaginationPageProps> = ({ data, columns, setParams, loa
         setTimeout(() => searchInput.current?.select(), 100);
       }
     },
-    sorter: (a: any, b: any) => {
-    console.log("LOG -> ~ getColumnSearchProps ~ b", b)
-    console.log("LOG -> ~ getColumnSearchProps ~ a", a)
-
-    },
+    sorter: true,
     render: (text: any) =>
       searchedColumn === dataIndex ? (
         <Highlighter
@@ -115,7 +113,7 @@ const PaginationPage: FC<PaginationPageProps> = ({ data, columns, setParams, loa
   columns = columns.map((column: any) => ({
     ...column,
     dataIndex: column.key,
-    ...getColumnSearchProps(column.key),
+    ...getColumnSearchProps(column.key, column.title),
   }))
 
   const onPageChange: PaginationProps['onChange'] = page => {
@@ -126,9 +124,30 @@ const PaginationPage: FC<PaginationPageProps> = ({ data, columns, setParams, loa
     setParams((oldValue: any) => ({ ...oldValue, size: pageSize }))
   };
 
+  const onTableChange = (
+    pagination: TablePaginationConfig,
+    filters: Record<string, FilterValue | null>,
+    sorter: SorterResult<any>
+  ) => {
+    setParams((oldValue: any) => ({
+      ...oldValue,
+      sort: sorter.order,
+      order: sorter.field
+    }))
+    console.log("LOG -> ~ sorter", sorter)
+    
+  }
+
   return (
     <>
-      <Table dataSource={data?.content} columns={columns} pagination={false} loading={loading} />
+      <Table
+        dataSource={data?.content}
+        columns={columns}
+        pagination={false}
+        loading={loading}
+        //@ts-ignore
+        onChange={onTableChange}
+      />
       <Pagination
         onChange={onPageChange}
         //@ts-ignore

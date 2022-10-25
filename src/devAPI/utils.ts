@@ -9,14 +9,15 @@ export const paginationSort = (array: any, params: any) => {
   if (params.sort) {
     sort = params.sort.split(',')
   }
+  console.log(sort)
 
   if (sort?.[0] && sort?.[1]) {
     sortContent = array.sort((a: any, b: any) => {
-      if (a[sort[0]] > b[sort[0]]) {
-        return sort[1] === 'asc' ? 1 : -1;
+      if (a[sort[1]] > b[sort[1]]) {
+        return sort[0] === 'ascend' ? 1 : -1;
       }
-      if (a[sort[0]] < b[sort[0]]) {
-        return sort[1] === 'asc' ? -1 : 1;
+      if (a[sort[1]] < b[sort[1]]) {
+        return sort[0] === 'ascend' ? -1 : 1;
       }
       return 0;
     });

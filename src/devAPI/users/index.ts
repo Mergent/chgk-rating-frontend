@@ -9,6 +9,7 @@ interface Users {
 const data: Users = new (fakeDataUsers as any)()
 
 export const fakeUsers = (url: string, config: any) => {
+  console.log("LOG -> ~ fakeUsers ~ config", config)
   console.log("LOG -> ~ fakeUsers ~ url", url)
   if (config.method === 'get') {
     const id = url.match(/.*\/(.*)$/);
