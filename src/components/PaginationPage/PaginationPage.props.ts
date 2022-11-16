@@ -5,6 +5,7 @@ export interface PaginationPageProps {
   columns: Column[]
   setParams: any
   loading: boolean
+  params: any
 }
 
 interface Column {

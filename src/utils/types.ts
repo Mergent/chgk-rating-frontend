@@ -34,6 +34,6 @@ export interface PaginationParams {
   dateFrom?: any
   sort: string
   order: string
-  filter?: any
+  filters?: any
 }
 

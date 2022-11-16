@@ -11,7 +11,7 @@ import { fakeUsers } from "./users";
 const fakeApi = async (url: string, config: any) => {
   const settings = JSON.parse(localStorage.getItem('devVB') ?? "{}");
 
-  const delayTime = parseInt(settings?.delay ?? '3000', 10)
+  const delayTime = parseInt(settings?.delay ?? '1000', 10)
   await delay(delayTime)
 
   if (url.includes('oauth/token')) {

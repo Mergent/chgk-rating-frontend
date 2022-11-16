@@ -1,4 +1,4 @@
-import { Button, Input, Pagination, Space, Table } from "antd";
+import { Button, Form, Input, Pagination, Space, Switch, Table } from "antd";
 import { FC, useRef, useState } from "react";
 import { SearchOutlined } from '@ant-design/icons';
 import Highlighter from 'react-highlight-words';
@@ -6,19 +6,35 @@ import { PaginationPageProps } from "./PaginationPage.props";
 import type { PaginationProps } from 'antd';
 import type { ColumnsType, TablePaginationConfig } from 'antd/es/table';
 import type { FilterValue, SorterResult } from 'antd/es/table/interface';
+import { useNavigate } from "react-router-dom";
+import FormComp from "./FormComp";
 
-const PaginationPage: FC<PaginationPageProps> = ({ data, columns, setParams, loading }) => {
+const PaginationPage: FC<PaginationPageProps> = ({ data, columns, setParams, loading, params }) => {
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
   const searchInput = useRef(null);
 
   const handleSearch = (selectedKeys: any, confirm: any, dataIndex: any) => {
+    console.log("LOG -> ~ handleSearch ~ dataIndex", dataIndex)
+    console.log("LOG -> ~ handleSearch ~ confirm", confirm)
+    console.log("LOG -> ~ handleSearch ~ selectedKeys", selectedKeys)
     confirm();
+    setParams((oldValue: any) => ({
+      ...oldValue,
+      filters: {
+        ...oldValue.filters,
+        [dataIndex]: selectedKeys[0]
+      }
+    }))
     setSearchText(selectedKeys[0]);
     setSearchedColumn(dataIndex);
   };
 
   const handleReset = (clearFilters: any) => {
+    setParams((oldValue: any) => ({
+      ...oldValue,
+      filters: {}
+    }))
     clearFilters();
     setSearchText('');
   };
@@ -116,23 +132,19 @@ const PaginationPage: FC<PaginationPageProps> = ({ data, columns, setParams, loa
     ...getColumnSearchProps(column.key, column.title),
   }))
 
-  const onPageChange: PaginationProps['onChange'] = page => {
-    setParams((oldValue: any) => ({ ...oldValue, page: page - 1 }))
-  };
-
-  const onShowSizeChange: PaginationProps['onShowSizeChange'] = (_current, pageSize) => {
-    setParams((oldValue: any) => ({ ...oldValue, size: pageSize }))
-  };
-
   const onTableChange = (
     pagination: TablePaginationConfig,
     filters: Record<string, FilterValue | null>,
     sorter: SorterResult<any>
   ) => {
+    console.log("LOG -> ~ pagination", pagination)
+    console.log("LOG -> ~ filters", filters)
     setParams((oldValue: any) => ({
       ...oldValue,
       sort: sorter.order,
-      order: sorter.field
+      order: sorter.field,
+      page: pagination.current ? pagination.current - 1 : 0,
+      size: pagination.pageSize ? pagination.pageSize : 10,
     }))
     console.log("LOG -> ~ sorter", sorter)
     
@@ -140,22 +152,19 @@ const PaginationPage: FC<PaginationPageProps> = ({ data, columns, setParams, loa
 
   return (
     <>
+      {/* <FormComp params={params} setParams={setParams} /> */}
       <Table
         dataSource={data?.content}
         columns={columns}
-        pagination={false}
+        pagination={{
+          current: data?.number ? data?.number + 1 : 1,
+          total: data?.totalElements,
+          showSizeChanger: true,
+          showTotal: total => `Total ${total} items`,
+        }}
         loading={loading}
         //@ts-ignore
         onChange={onTableChange}
-      />
-      <Pagination
-        onChange={onPageChange}
-        //@ts-ignore
-        current={data?.number + 1}
-        total={data?.totalElements}
-        showSizeChanger
-        onShowSizeChange={onShowSizeChange}
-        showTotal={total => `Total ${total} items`}
       />
     </>
   )

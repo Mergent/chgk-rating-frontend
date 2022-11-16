@@ -66,9 +66,11 @@ export const filterSort = (array: any, params: any) => {
     if (!key.startsWith('filter')) continue;
     const paramsKey = key.split('.')[1]
     filterArray = filterArray.filter((elem: any) => {
-      if (Array.isArray(elem[paramsKey]))
+      if (Array.isArray(elem[paramsKey])) {
         return elem[paramsKey].join(',') === filterParams[`filter.${paramsKey}`]
-      return elem[paramsKey] === filterParams[`filter.${paramsKey}`]
+      }
+      return elem[paramsKey].includes(filterParams[`filter.${paramsKey}`])
+
     })
   }
 

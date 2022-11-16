@@ -2,17 +2,20 @@ import { useQuery, useQueryClient } from 'react-query';
 import { callApi } from '../../utils/apiUtils';
 import { Links } from '../../utils/const';
 import { PaginationParams, PaginationResponse } from '../../utils/types';
+import { getPreparedForSubmissionFilters } from '../../utils/utils';
 import { Config } from '../config';
 import { User } from './getUser';
 
-interface UsersParams extends PaginationParams {}
+export interface UsersParams extends PaginationParams {
+  isActive?: boolean
+}
 
 export const defaultParamsUsers: UsersParams = {
   page: 0,
   size: 10,
-  sort: 'desc',
-  order: 'date',
-  filter: {},
+  sort: 'ascend',
+  order: 'username',
+  filters: {},
 };
 
 const getUsers = async (links: Links, params: UsersParams) => {
@@ -28,7 +31,7 @@ const getUsers = async (links: Links, params: UsersParams) => {
       size: params?.size,
       sort,
       // search: params?.search,
-      // ...getPreparedForSubmissionFilters(params?.filters)
+      ...getPreparedForSubmissionFilters(params?.filters)
     }
   }
 
