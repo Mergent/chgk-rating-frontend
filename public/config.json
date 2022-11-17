@@ -27,6 +27,16 @@
           "create_role": "/db/role",
           "edit_role": "/db/role/:id"
         }
+      },
+      "playerservice": {
+        "url": "http://127.0.0.1:8090/playerservice",
+        "endpoints": {
+          "get_players": "/db/players",
+          "player": "/db/player/:id",
+          "delete_players": "/db/players",
+          "create_player": "/db/player",
+          "edit_player": "/db/player/:id"
+        }
       }
     }
   }

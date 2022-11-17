@@ -38,6 +38,11 @@ const SiderComp = () => {
               <span className="nav-text">{t('pages.roles')}</span>
             </Link>
           </Menu.Item>
+          <Menu.Item key='players'>
+            <Link to="/players">
+              <span className="nav-text">{t('pages.players')}</span>
+            </Link>
+          </Menu.Item>
         </Menu>
       </Layout.Sider>
   )
