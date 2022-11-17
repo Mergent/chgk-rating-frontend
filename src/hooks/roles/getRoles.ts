@@ -4,25 +4,22 @@ import { Links } from '../../utils/const';
 import { PaginationParams, PaginationResponse } from '../../utils/types';
 import { getPreparedForSubmissionFilters } from '../../utils/utils';
 import { Config } from '../config';
-import { Role } from '../roles/getRole';
-import { User } from './getUser';
+import { Role } from './getRole';
 
-export interface UsersParams extends PaginationParams {
+export interface RolesParams extends PaginationParams {
   isActive?: boolean
-  roles?: Role[] | null
 }
 
-export const defaultParamsUsers: UsersParams = {
+export const defaultParamsRoles: RolesParams = {
   page: 0,
   size: 10,
   sort: 'ascend',
   order: 'username',
-  filters: {},
 };
 
-const getUsers = async (links: Links, params: UsersParams) => {
-  const serviceConfig = links.services.userservice;
-  const url = serviceConfig.url + serviceConfig.endpoints?.get_users;
+const getRoles = async (links: Links, params: RolesParams) => {
+  const serviceConfig = links.services.roleservice;
+  const url = serviceConfig.url + serviceConfig.endpoints?.get_roles;
 
   const sort = params?.sort && params?.order ? `${params?.sort},${params?.order}` : ''
 
@@ -33,19 +30,19 @@ const getUsers = async (links: Links, params: UsersParams) => {
       size: params?.size,
       sort,
       // search: params?.search,
-      ...getPreparedForSubmissionFilters(params?.filters)
+      // ...getPreparedForSubmissionFilters(params?.filters)
     }
   }
 
   return callApi(url, config);
 }
 
-export default function useGetUsers(params: UsersParams | null) {
+export default function useGetRoles(params: RolesParams | null) {
   const queryClient = useQueryClient()
   const config = queryClient.getQueryData<Config>('config')
-  return useQuery<PaginationResponse<User>, Error>(
-    ['users', { ...defaultParamsUsers, ...params }],
-    () => getUsers(config!.links, { ...defaultParamsUsers, ...params }),
+  return useQuery<PaginationResponse<Role>, Error>(
+    ['roles', { ...defaultParamsRoles, ...params }],
+    () => getRoles(config!.links, { ...defaultParamsRoles, ...params }),
 
     {
       enabled: !!config,

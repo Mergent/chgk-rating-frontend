@@ -6,6 +6,7 @@ import { delay } from "./utils";
 // import { fakeDrupalUsers } from "./drupalUsers/users";
 import { fakeLogin } from './login';
 import { fakeUsers } from "./users";
+import { fakeRoles } from "./roles";
 // import { fakeJobs } from "./jobs/jobs";
 
 const fakeApi = async (url: string, config: any) => {
@@ -28,6 +29,9 @@ const fakeApi = async (url: string, config: any) => {
   // }
   if (url.includes('userservice/db/user')) {
     return fakeUsers(url, config)
+  }
+  if (url.includes('roleservice/db/role')) {
+    return fakeRoles(url, config)
   }
   // if (url.startsWith('http://127.0.0.1:8087/syncservice/drupal/users')) {
   //   return fakeDrupalUsers(url, config)

@@ -3,6 +3,7 @@ import useConfig from "../hooks/config"
 import useGetCurrentUser from "../hooks/users/getCurrentUser"
 import Login from "../pages/Login"
 import Main from "../pages/Main"
+import RolesComp from "../pages/roles.tsx/Roles"
 import Teams from "../pages/Teams"
 import User from "../pages/users/User"
 import Users from "../pages/users/Users"
@@ -18,6 +19,9 @@ const RouterComp = () => {
     { path: '/users', children: [
       { index: true, element: <Users />},
       { path: 'new', element: <User />}
+    ]},
+    { path: '/roles', children: [
+      { index: true, element: <RolesComp />}
     ]},
     { path: '/teams', element: <Teams />}
   ])

@@ -1,4 +1,4 @@
-import { Button, Form, Switch } from "antd"
+import { Button, Form, Select, Switch } from "antd"
 import { FC } from "react"
 
 interface FormCompProps {
@@ -11,16 +11,12 @@ export interface Filter {
   title: string
   key: string
   value: any
+  options?: any
 }
 
 const FormComp: FC<FormCompProps> = ({ filters, setParams }) => {
-  // const sortParams = Object.keys(params)
-  //   .filter((key) => key !== 'size' && key !== 'filters' && key !== 'order' && key !== 'page' && key !=='sort')
-  //   .map((key) => ({ key, condition: params[key]}))
-  // console.log(sortParams)
 
   const onFinish = (values: any) => {
-    console.log("LOG -> ~ onFinish ~ e", values)
     setParams((oldValue: any) => ({
       ...oldValue,
       filters: {
@@ -32,7 +28,6 @@ const FormComp: FC<FormCompProps> = ({ filters, setParams }) => {
   }
 
   const initialValues = filters.reduce((a, v) => ({ ...a, [v.key]: v.value}), {}) 
-  console.log("LOG -> ~ initialValues", initialValues)
 
   return (
     <Form
@@ -47,6 +42,13 @@ const FormComp: FC<FormCompProps> = ({ filters, setParams }) => {
           return (
             <Form.Item valuePropName="checked" name={filter.key} label={filter.title}>
               <Switch />
+            </Form.Item>
+          )
+        }
+        if (filter.type === "select") {
+          return (
+            <Form.Item name={filter.key} label={filter.title}>
+              <Select options={filter.options} />
             </Form.Item>
           )
         }

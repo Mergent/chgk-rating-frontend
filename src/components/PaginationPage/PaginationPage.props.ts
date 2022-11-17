@@ -1,7 +1,7 @@
 import { PaginationResponse } from "../../utils/types"
 
 export interface PaginationPageProps {
-  data: PaginationResponse<any> | undefined
+  data: any
   columns: Column[]
   setParams: any
   loading: boolean

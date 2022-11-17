@@ -1,6 +1,7 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import { LOCALE } from "../utils/const";
+
 import translationEN from './en.json';
 import translationRU from './ru.json';
 

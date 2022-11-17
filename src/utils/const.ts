@@ -21,6 +21,16 @@ const links = {
         create_user: "/db/user",
         edit_user: "/db/user/:id"
       }
+    },
+    roleservice: {
+      url: "http://127.0.0.1:8090/roleservice",
+      endpoints: {
+        get_roles: "/db/roles",
+        get_role: "/db/role/:id",
+        delete_roles: "/db/roles",
+        create_role: "/db/role",
+        edit_role: "/db/role/:id"
+      }
     }
   }
 } as const;

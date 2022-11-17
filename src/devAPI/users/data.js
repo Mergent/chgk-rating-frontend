@@ -7,7 +7,7 @@ export function fakeDataUsers() {
       "firstName": "Isold",
       "lastName": "Steube",
       "division": "r",
-      "roles": ["ROLE_ENTWICKELN"]
+      "roles": ["ADMIN"]
     },
     {
       "id": 3,
@@ -16,7 +16,7 @@ export function fakeDataUsers() {
       "firstName": "Lenz",
       "lastName": "Weber",
       "division": "owl",
-      "roles": ["ROLE_GENERIEREN"]
+      "roles": ["TOURNAMENT_ORGCOM"]
     },
     {
       "id": 5,
@@ -25,7 +25,7 @@ export function fakeDataUsers() {
       "firstName": "Annaleisa",
       "lastName": "Wegener",
       "division": "w",
-      "roles": ["ROLE_MANAGER"]
+      "roles": ["TOURNAMENT_REPRESENTATIVE, TOURNAMENT_ORGCOM"]
     },
     {
       "id": 6,
@@ -34,7 +34,7 @@ export function fakeDataUsers() {
       "firstName": "Faramond",
       "lastName": "Warner",
       "division": "alle",
-      "roles": ["ROLE_ADMIN"]
+      "roles": ["TOURNAMENT_LEADING"]
     },
     {
       "id": 8,

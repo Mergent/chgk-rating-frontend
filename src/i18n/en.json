@@ -3,13 +3,24 @@
     "main": "Main",
     "users": "Users",
     "teams": "Teams",
-    "players": "Players"
+    "players": "Players",
+    "roles": "Roles"
   },
   "languages": {
     "en": "English",
     "ru": "Russia"
   },
   "header": {
-    "login": "Log in/register"
+    "login": "Log in/register",
+    "logout": "Log out"
+  },
+  "roles": {
+    "title": {
+      "admin": "Administrator",
+      "orgcom": "Tournament committee organizer",
+      "representative": "Tournament representative",
+      "leading": "Tournament leading",
+      "player": "Tournament player"
+    }
   }
 }
