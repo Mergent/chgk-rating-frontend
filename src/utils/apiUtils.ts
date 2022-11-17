@@ -12,7 +12,6 @@ export const decodeUserProfile = (idToken: any) => {
 };
 
 export const authApi = async (authData: any, url: string) => {
-  console.log("LOG -> ~ authApi ~ process.env.REACT_APP_ENV", process.env.REACT_APP_ENV)
   if (process.env.REACT_APP_ENV === 'development') {
     return fakeApi(url, authData);
   }
