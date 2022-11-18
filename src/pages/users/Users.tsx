@@ -7,6 +7,8 @@ import FormComp, { Filter } from "../../components/PaginationPage/FormComp";
 import useGetRoles from "../../hooks/roles/getRoles";
 import { Roles } from "../../hooks/roles/getRole";
 import { useTranslation } from "react-i18next";
+import { Column } from "../../components/PaginationPage/PaginationPage.props";
+import { ColumnsType } from "antd/lib/table";
 
 const defaultParamsUsers: UsersParams = {
   page: 0,
@@ -50,11 +52,11 @@ const Users = () => {
     }
   ]
 
-  const columns = [
+  const columns: ColumnsType<any> = [
     {
       title: 'Username',
       key: 'username',
-      sort: true,
+      // sort: true,
       defaultSortOrder: 'ascend',
     },
     {

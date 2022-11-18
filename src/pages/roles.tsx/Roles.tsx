@@ -5,7 +5,9 @@ import { useNavigate } from "react-router-dom";
 import FormComp, { Filter } from "../../components/PaginationPage/FormComp";
 import useGetRoles, { RolesParams } from "../../hooks/roles/getRoles";
 import { useTranslation } from "react-i18next";
-import { Roles } from "../../hooks/roles/getRole";
+import { Role, Roles } from "../../hooks/roles/getRole";
+import { ColumnType } from "antd/lib/table";
+import { ColumnsType } from "antd/es/table";
 
 const defaultParamsRoles: RolesParams = {
   page: 0,
@@ -42,11 +44,11 @@ const RolesComp = () => {
     }
   ]
 
-  const columns = [
+  const columns: ColumnsType<any> = [
     {
       title: 'Title',
       key: 'title',
-      sort: true,
+      // sort: true,
       defaultSortOrder: 'ascend',
     }
   ];

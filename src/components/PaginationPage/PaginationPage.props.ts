@@ -1,14 +1,19 @@
 import { PaginationResponse } from "../../utils/types"
+import type { ColumnsType } from 'antd/es/table';
 
 export interface PaginationPageProps {
   data: any
-  columns: Column[]
+  columns: ColumnsType<DataType>
   setParams: any
   loading: boolean
   params: any
 }
 
-interface Column {
+interface DataType {
+  sort: string,
   title: string
-  key: string
+}
+
+export interface Column extends ColumnsType<any> {
+  sort: any
 }
