@@ -11,9 +11,9 @@ import { fakePlayers } from "./players";
 // import { fakeJobs } from "./jobs/jobs";
 
 const fakeApi = async (url: string, config: any) => {
-  const settings = JSON.parse(localStorage.getItem('devVB') ?? "{}");
+  const settings = JSON.parse(localStorage.getItem('chgkRatingDevSettings') ?? "{}");
 
-  const delayTime = parseInt(settings?.delay ?? '1000', 10)
+  const delayTime = settings?.delay ?? 1000
   await delay(delayTime)
 
   if (url.includes('oauth/token')) {

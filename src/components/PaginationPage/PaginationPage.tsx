@@ -122,7 +122,8 @@ const PaginationPage: FC<PaginationPageProps> = ({ data, columns, setParams, loa
           textToHighlight={text ? text.toString() : ''}
         />
       ) : (
-        text
+        //@ts-ignore
+        <span columnName={dataIndex}>{text}</span>
       ),
   });
 
